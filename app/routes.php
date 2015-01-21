@@ -18,10 +18,22 @@ Route::get('/', function()
 
 Route::match(array('GET', 'POST'), '/textReceive', function()
 {
-    $xml = '<Response><Say>Hello - your app just answered the phone. Neat, eh?</Say></Response>';
-    $response = Response::make($xml, 200);
-    $response->header('Content-Type', 'text/xml');
-    return $response;
+    $AccountSid = "AC59fb1f6071623fde6d59b872247393df";
+    $AuthToken = "b3be4502092b2d7b7f1216351612186b";
+
+    $client = new Services_Twilio($AccountSid, $AuthToken);
+
+    $message = $client->account->messages->create(array(
+        "From" => "514-500-0476",
+        "To" => "418-815-9091",
+        "Body" => "Test message!",
+    ));
+
+    return "";
+    //$xml = '<Response><Say>Hello - your app just answered the phone. Neat, eh?</Say></Response>';
+    //$response = Response::make($xml, 200);
+    //$response->header('Content-Type', 'text/xml');
+    //return $response;
 });
 
 /*
