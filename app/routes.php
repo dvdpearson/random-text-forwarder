@@ -21,7 +21,7 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
     $AccountSid = "AC59fb1f6071623fde6d59b872247393df";
     $AuthToken = "b3be4502092b2d7b7f1216351612186b";
 
-    $number = Input::get('phoneNumber');
+    $number = $_REQUEST['From'];
     $message = Input::get('message');
 
     $client = new Services_Twilio($AccountSid, $AuthToken);
