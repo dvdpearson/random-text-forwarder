@@ -16,9 +16,12 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/textReceive', function()
+Route::match(array('GET', 'POST'), '/textReceive', function()
 {
-    return "bleh";
+    $xml = '<Response><Say>Hello - your app just answered the phone. Neat, eh?</Say></Response>';
+    $response = Response::make($xml, 200);
+    $response->header('Content-Type', 'text/xml');
+    return $response;
 });
 
 /*
