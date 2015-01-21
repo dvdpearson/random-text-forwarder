@@ -20,7 +20,6 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
 {
 
     $numbers = array(
-        '+15143470772',
         '+14188159091'
     );
 
