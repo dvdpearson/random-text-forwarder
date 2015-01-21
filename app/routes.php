@@ -40,7 +40,7 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
     $message = $client->account->messages->create(array(
         "From" => "514-500-0476",
         "To" => $to,
-        "Body" => "ton num : ".$number." et ton txt:".$message,
+        "Body" => $message,
     ));
 
     return "";
