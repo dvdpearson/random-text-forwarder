@@ -22,7 +22,7 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
     $AuthToken = "b3be4502092b2d7b7f1216351612186b";
 
     $number = $_REQUEST['From'];
-    $message = $_REQUEST['Message'];
+    $message = $_REQUEST['Body'];
 
     $client = new Services_Twilio($AccountSid, $AuthToken);
 
