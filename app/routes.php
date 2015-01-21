@@ -26,7 +26,7 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
     $message = $client->account->messages->create(array(
         "From" => "514-500-0476",
         "To" => "418-815-9091",
-        "Body" => "Test message!",
+        "Body" => "Test message : ".$_POST['from'],
     ));
 
     return "";
