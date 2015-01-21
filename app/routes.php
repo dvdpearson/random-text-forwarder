@@ -18,6 +18,17 @@ Route::get('/', function()
 
 Route::match(array('GET', 'POST'), '/textReceive', function()
 {
+
+    $numbers = array(
+        '+15143470772',
+        '+14188159091'
+    );
+
+    $to = $numbers[array_rand($numbers)];
+    while ($to == $_REQUEST['From']) {
+        $to = $numbers[array_rand($numbers)];
+    }
+
     $AccountSid = "AC59fb1f6071623fde6d59b872247393df";
     $AuthToken = "b3be4502092b2d7b7f1216351612186b";
 
@@ -28,7 +39,7 @@ Route::match(array('GET', 'POST'), '/textReceive', function()
 
     $message = $client->account->messages->create(array(
         "From" => "514-500-0476",
-        "To" => "418-815-9091",
+        "To" => $to,
         "Body" => "ton num : ".$number." et ton txt:".$message,
     ));
 
