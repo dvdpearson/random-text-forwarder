@@ -16,7 +16,10 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-
+Route::get('/textReceive', function()
+{
+    return "bleh";
+});
 
 /*
 
