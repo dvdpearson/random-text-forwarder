@@ -10,49 +10,31 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
 Route::get('/', function()
 {
 	return View::make('hello');
 });
 
-Route::match(array('GET', 'POST'), '/textReceive', function()
+Route::match(array('GET', 'POST'), '/incoming', function()
 {
+  //return App\Models\Message::find(5)->sender->phoneNumber;
+  //$message =  Mixsenger::getRandomRecipient(App\Models\Message::find(5));
+  //return $message->recipient->phoneNumber;
+  $sid = Input::get('MessageSid');
+  $from = Input::get('From');
+  $to = Input::get('To');
+  $body = Input::get('Body');
+  $message =  Mixsenger::addMessage($sid, $from, $body);
+  $message =  Mixsenger::getRandomRecipient($message);
+  $client = new Services_Twilio($_ENV['TWILIO_ACCOUNT_SID'], $_ENV['TWILIO_AUTH_TOKEN']);
 
-    $numbers = array(
-        '+14188159091'
-    );
+  // Use the Twilio REST API client to send a text message
+  $m = $client->account->messages->sendMessage(
+    $_ENV['TWILIO_NUMBER'], // the text will be sent from your Twilio number
+    $message->recipient->phoneNumber, // the phone number the text will be sent to
+    $message->body // the body of the text message
+  );
 
-    $to = $numbers[array_rand($numbers)];
-    while ($to == $_REQUEST['From']) {
-        $to = $numbers[array_rand($numbers)];
-    }
-
-    $AccountSid = "AC59fb1f6071623fde6d59b872247393df";
-    $AuthToken = "b3be4502092b2d7b7f1216351612186b";
-
-    $number = $_REQUEST['From'];
-    $message = $_REQUEST['Body'];
-
-    $client = new Services_Twilio($AccountSid, $AuthToken);
-
-    $message = $client->account->messages->create(array(
-        "From" => "514-500-0476",
-        "To" => $to,
-        "Body" => $message,
-    ));
-
-    return "";
-    //$xml = '<Response><Say>Hello - your app just answered the phone. Neat, eh?</Say></Response>';
-    //$response = Response::make($xml, 200);
-    //$response->header('Content-Type', 'text/xml');
-    //return $response;
+  // Return the message object to the browser as JSON
+  return $m;
 });
-
-/*
-
-/receive (text message received from someone)
-----> Send text message to a random phone number 
-
-Available doc : https://www.twilio.com/blog/2014/09/getting-started-with-twilio-and-the-laravel-framework-for-php.html
-*
