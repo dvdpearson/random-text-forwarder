@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'DXoXqF7wYEQO8tve8c7QUMTzYWWOHmHK',
+	'key' => 'YourSecretKey!!!',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+   		'ThomasRag\Mixsenger\MixsengerServiceProvider'
 
 	),
 
@@ -188,6 +189,7 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+    		'Mixsenger'         => 'ThomasRag\Mixsenger\Facades\Mixsenger'
 
 	),
 
