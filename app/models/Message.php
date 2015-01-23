@@ -1,4 +1,5 @@
-<?php namespace ;
+<?php 
+namespace App/Models;
 
 use Eloquent;
 
