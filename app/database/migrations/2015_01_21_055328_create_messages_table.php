@@ -15,13 +15,11 @@ class CreateMessagesTable extends Migration {
 		Schema::create('messages', function(Blueprint $table)
 		{
 			$table->increments('id');
-      			$table->string('twilio_sid');
+      		$table->string('twilio_sid');
 			$table->text('body');
-      			$table->integer('sender_id')->unsigned();
-      			$table->foreign('sender_id')->references('id')->on('contacts');
-      			$table->integer('recipient_id')->unsigned()->nullable();
-      			$table->foreign('recipient_id')->references('id')->on('contacts');
-      			$table->enum('status', array('created','sent', 'received'));
+      		$table->integer('sender_id')->unsigned();
+      		$table->integer('recipient_id')->unsigned()->nullable();
+      		$table->enum('status', array('created','sent', 'received'));
 			$table->timestamps();
 		});
 	}

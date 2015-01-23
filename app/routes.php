@@ -17,15 +17,15 @@ Route::get('/', function()
 
 Route::match(array('GET', 'POST'), '/incoming', function()
 {
-  //return App\Models\Message::find(5)->sender->phoneNumber;
-  //$message =  Mixsenger::getRandomRecipient(App\Models\Message::find(5));
-  //return $message->recipient->phoneNumber;
+
   $sid = Input::get('MessageSid');
   $from = Input::get('From');
   $to = Input::get('To');
   $body = Input::get('Body');
+
   $message =  Mixsenger::addMessage($sid, $from, $body);
   $message =  Mixsenger::getRandomRecipient($message);
+
   $client = new Services_Twilio($_ENV['TWILIO_ACCOUNT_SID'], $_ENV['TWILIO_AUTH_TOKEN']);
 
   // Use the Twilio REST API client to send a text message

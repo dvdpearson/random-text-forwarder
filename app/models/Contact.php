@@ -1,5 +1,5 @@
 <?php 
-namespace App/Models;
+namespace App\Models;
 use Eloquent;
 
 class Contact extends Eloquent {
