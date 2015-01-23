@@ -18,9 +18,7 @@ class CreateMessagesTable extends Migration {
       $table->string('twilio_sid');
 			$table->text('body');
       $table->integer('sender_id')->unsigned();
-      $table->foreign('sender_id')->references('id')->on('contacts');
-      $table->integer('recipient_id')->unsigned();
-      $table->foreign('recipient_id')->references('id')->on('contacts');
+      $table->integer('recipient_id')->unsigned()->nullable();
       $table->enum('status', array('created','sent', 'received'));
 			$table->timestamps();
 		});
